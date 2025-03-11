@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class HistoriaClinica {
+    // Atributos del Paciente
+    private String nombre;
+    private int edad;
+    private String fechaNacimiento;
+    private String ci;
+    private String sexo;
+    private double peso;
+    private double altura;
+
+    // Lista de Enfermedades
+    private List<Enfermedad> enfermedades;
+
+    // Constructor
+    public HistoriaClinica(String nombre, int edad, String fechaNacimiento, String ci, String sexo, double peso, double altura) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
+        this.ci = ci;
+        this.sexo = sexo;
+        this.peso = peso;
+        this.altura = altura;
+        this.enfermedades = new ArrayList<>();
+    }
+
+    // Métodos para manejar enfermedades
+    public void agregarEnfermedad(String nombreEnfermedad, String sintomas, String tratamiento) {
+        Enfermedad nuevaEnfermedad = new Enfermedad(nombreEnfermedad, sintomas, tratamiento);
+        enfermedades.add(nuevaEnfermedad);
+    }
+
+    public void eliminarEnfermedad(String nombreEnfermedad) {
+        enfermedades.removeIf(enfermedad -> enfermedad.getNombre().equalsIgnoreCase(nombreEnfermedad));
+    }
+
+    // Método para mostrar la Historia Clínica
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Historia Clínica de ").append(nombre).append(":\n");
+        sb.append("Edad: ").append(edad).append(", Fecha de nacimiento: ").append(fechaNacimiento).append("\n");
+        sb.append("CI: ").append(ci).append(", Sexo: ").append(sexo).append("\n");
+        sb.append("Peso: ").append(peso).append(" kg, Altura: ").append(altura).append(" m\n");
+        sb.append("Enfermedades:\n");
+        for (Enfermedad enfermedad : enfermedades) {
+            sb.append("- ").append(enfermedad.getNombre()).append(": ").append(enfermedad.getSintomas())
+              .append(" | Tratamiento: ").append(enfermedad.getTratamiento()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    // Clase interna para Enfermedades
+    private static class Enfermedad {
+        private String nombre;
+        private String sintomas;
+        private String tratamiento;
+
+        public Enfermedad(String nombre, String sintomas, String tratamiento) {
+            this.nombre = nombre;
+            this.sintomas = sintomas;
+            this.tratamiento = tratamiento;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public String getSintomas() {
+            return sintomas;
+        }
+
+        public String getTratamiento() {
+            return tratamiento;
+        }
+    }
+}
