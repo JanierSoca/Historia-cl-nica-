@@ -1,0 +1,29 @@
+@startuml
+class HistoriaClinica {
+    - String nombre
+    - int edad
+    - String fechaNacimiento
+    - String ci
+    - String sexo
+    - double peso
+    - double altura
+    - List<Enfermedad> enfermedades
+
+    + HistoriaClinica(String, int, String, String, String, double, double)
+    + agregarEnfermedad(String, String, String): void
+    + eliminarEnfermedad(String): void
+    + toString(): String
+}
+
+class Enfermedad {
+    - String nombre
+    - String sintomas
+    - String tratamiento
+
+    + Enfermedad(String, String, String)
+    + getNombre(): String
+    + getSintomas(): String
+    + getTratamiento(): String
+}
+HistoriaClinica o-- Enfermedad
+@enduml
